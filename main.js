@@ -6,7 +6,7 @@ d3.json("data.json")
         const svgBoard = d3.select("#svg-board");
         svgBoard.attr("width", boardWidth);
         svgBoard.attr("height", boardHeight);
-        const graph = computeGraph(data);
+        let graph = new Graph(data);
         let forceDirected = new SpringEmbedder(graph, svgBoard);
     })
     .catch(error => console.log(error));
