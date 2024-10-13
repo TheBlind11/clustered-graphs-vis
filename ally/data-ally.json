@@ -1,0 +1,210 @@
+[
+    {
+        "id": 102,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 0,
+        "neighbors": [
+            103,
+            104,
+            105
+        ]
+    },
+    {
+        "id": 103,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 0,
+        "neighbors": [
+            102,
+            104,
+            207
+        ]
+    },
+    {
+        "id": 104,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 0,
+        "neighbors": [
+            208,
+            102,
+            103
+        ]
+    },
+    {
+        "id": 105,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 0,
+        "neighbors": [
+            106,
+            107,
+            108,
+            109,
+            206
+        ]
+    },
+    {
+        "id": 106,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 0,
+        "neighbors": [
+            105,
+            107,
+            108,
+            109
+        ]
+    },
+    {
+        "id": 107,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 0,
+        "neighbors": [
+            105,
+            106,
+            108,
+            109
+        ]
+    },
+    {
+        "id": 108,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 0,
+        "neighbors": [
+            105,
+            106,
+            107,
+            109
+        ]
+    },
+    {
+        "id": 109,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 0,
+        "neighbors": [
+            105,
+            106,
+            107,
+            108
+        ]
+    },
+    {
+        "id": 206,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 1,
+        "neighbors": [
+            207,
+            208,
+            105
+        ]
+    },
+    {
+        "id": 207,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 1,
+        "neighbors": [
+            206,
+            208,
+            103
+        ]
+    },
+    {
+        "id": 208,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 1,
+        "neighbors": [
+            206,
+            207,
+            104
+        ]
+    },
+    {
+        "id": 209,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 2,
+        "neighbors": [
+            210, 211
+        ]
+    },
+    {
+        "id": 210,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 2,
+        "neighbors": [
+            209, 211, 212
+        ]
+    },
+    {
+        "id": 211,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 2,
+        "neighbors": [
+            209, 210, 212, 213
+        ]
+    },
+    {
+        "id": 212,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 2,
+        "neighbors": [
+            210, 211, 213
+        ]
+    },
+    {
+        "id": 213,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 2,
+        "neighbors": [
+            211, 212
+        ]
+    },
+    {
+        "id": 214,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 3,
+        "neighbors": [
+            215
+        ]
+    },
+    {
+        "id": 215,
+        "x": 0,
+        "y": 0,
+        "fake": false,
+        "cluster": 3,
+        "neighbors": [
+            214
+        ]
+    }
+]
