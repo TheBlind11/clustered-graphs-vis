@@ -226,7 +226,7 @@ class SpringEmbedder {
             });
         });
 
-        console.log(total_force);
+        //console.log(total_force);
         return total_force;
     }
 }
