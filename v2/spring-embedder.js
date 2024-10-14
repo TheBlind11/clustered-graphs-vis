@@ -145,29 +145,7 @@ class SpringEmbedder {
         return { x: electro_force_x, y: electro_force_y };
     }
 
-    /* _computeContainmentForce(node) {
-        const clusterFakeNodes = this._graph._getFakeNodesOfCluster(node.cluster);
-        let containmentForceX = 0.0;
-        let containmentForceY = 0.0;
-
-        const centerX = clusterFakeNodes.reduce((sum, fn) => sum + fn.x, 0) / clusterFakeNodes.length;
-        const centerY = clusterFakeNodes.reduce((sum, fn) => sum + fn.y, 0) / clusterFakeNodes.length;
-
-        const distToCenter = distance(node, { x: centerX, y: centerY });
-        const containmentStrength = this._attractionClusterStrength * 0.01 * (this._clusterBoundaryRadius - distToCenter);
-
-        if (distToCenter >= this._clusterBoundaryRadius) {
-            containmentForceX += (centerX - node.x) * containmentStrength * 2.0 / distToCenter;
-            containmentForceY += (centerY - node.y) * containmentStrength * 2.0 / distToCenter;
-        } else {
-            containmentForceX += (centerX - node.x) * containmentStrength / distToCenter;
-            containmentForceY += (centerY - node.y) * containmentStrength / distToCenter;
-        }
-
-        return { x: containmentForceX, y: containmentForceY };
-    } */ 
-
-    _computeContainmentForce(node, clusterCenter) {
+    _computeContainmentForce(node) {
         const clusterFakeNodes = this._graph._getFakeNodesOfCluster(node.cluster);
         const centerX = clusterFakeNodes.reduce((sum, fn) => sum + fn.x, 0) / clusterFakeNodes.length;
         const centerY = clusterFakeNodes.reduce((sum, fn) => sum + fn.y, 0) / clusterFakeNodes.length;
@@ -189,69 +167,19 @@ class SpringEmbedder {
         let centering_force_y = 0.0;
         const epsilon = 0.0001;
 
-        // Calcola la differenza tra la posizione del nodo e il centro
         const delta_x = (boardWidth / 2) - node.x;
         const delta_y = (boardHeight / 2) - node.y;
 
-        // Calcola la distanza del nodo dal centro
         const dist = Math.max(Math.sqrt(delta_x * delta_x + delta_y * delta_y), epsilon);
 
-        // Definisci una costante per la forza di centratura
-        //const centeringStrength = 0.45; // Modifica questo valore per regolare la forza
-        const centeringStrength = 0.75; // Modifica questo valore per regolare la forza
+        //const centeringStrength = 0.45;
+        const centeringStrength = 0.75;
 
-        // La forza di centratura è proporzionale alla distanza
         centering_force_x = centeringStrength * delta_x / dist;
         centering_force_y = centeringStrength * delta_y / dist;
 
         return { x: centering_force_x, y: centering_force_y };
     }
-
-    _computeClusterCenteringForce(node, clusterCenter) {
-        const epsilon = 0.0001;
-        const deltaX = clusterCenter.x - node.x;
-        const deltaY = clusterCenter.y - node.y;
-        const dist = Math.max(distance(clusterCenter, node), epsilon);
-
-        const centeringStrength = 0.50;  // Costante di forza di centratura
-
-        return {
-            x: centeringStrength * deltaX / dist,
-            y: centeringStrength * deltaY / dist
-        };
-    }
-
-
-    // Function to update every node (true and fake) position
-    /* _updateNodes() {
-        let nodes = this._graph._getNodes();
-        let total_force = 0.0;
-        
-        nodes.forEach(node => {
-            const spring_force = this._computeSpringForce(node);
-            const electro_force = this._computeElectrostaticForce(node);
-            const containment_force = this._computeContainmentForce(node);
-            const centering_force = this._computeCenteringForce(node);
-
-            let total_force_x = spring_force.x + electro_force.x + containment_force.x + centering_force.x;
-            let total_force_y = spring_force.y + electro_force.y + containment_force.y + centering_force.y;
-
-            node.x += total_force_x;
-            node.y += total_force_y;
-            total_force += (Math.abs(total_force_x) + Math.abs(total_force_y));
-        });
-
-        this._graph._getClusters().forEach( cluster => {
-            const realClusterNodes = this._graph._getNodesOfCluster(cluster.id);
-            const centerX = realClusterNodes.reduce((sum, n) => sum + n.x, 0) / realClusterNodes.length;
-            const centerY = realClusterNodes.reduce((sum, n) => sum + n.y, 0) / realClusterNodes.length;
-
-            const fakeNodes = this._graph._getFakeNodesOfCluster(cluster.id);
-            maintainCircularChain(fakeNodes, centerX, centerY, this._clusterBoundaryRadius);
-        });
-
-        return total_force;
-    } */
 
     _updateNodes() {
         let clusters = this._graph._getClusters();
@@ -259,37 +187,30 @@ class SpringEmbedder {
 
         clusters.forEach(cluster => {
             const nodesInCluster = this._graph._getNodesOfCluster(cluster.id);
-            const fakeNodesInCluster = this._graph._getFakeNodesOfCluster(cluster.id); // Suppongo che tu abbia questa funzione
-            const clusterCenter = computeClusterCenter(nodesInCluster);
+            const fakeNodesInCluster = this._graph._getFakeNodesOfCluster(cluster.id);
 
             nodesInCluster.forEach( node => {
                 const spring_force = this._computeSpringForce(node);
                 const electro_force = this._computeElectrostaticForce(node);
                 const containment_force = this._computeContainmentForce(node);
                 const centering_force = this._computeCenteringForce(node);
-                //const cluster_centering_force = this._computeClusterCenteringForce(node, clusterCenter);
 
-                // Somma di tutte le forze
                 let total_force_x = spring_force.x + electro_force.x + centering_force.x + containment_force.x;
                 let total_force_y = spring_force.y + electro_force.y + centering_force.y + containment_force.y;
 
-                // Applica le forze ai nodi
                 node.x += total_force_x;
                 node.y += total_force_y;
                 total_force += (Math.abs(total_force_x) + Math.abs(total_force_y));
             });
 
-            // Applica le forze anche ai nodi fittizi
             fakeNodesInCluster.forEach( fakeNode => {
-                const spring_force = this._computeSpringForce(fakeNode);  // Calcola la forza elastica tra nodi fittizi e reali
-                const electro_force = this._computeElectrostaticForce(fakeNode);  // Calcola la forza elettrostatica tra nodi fittizi e reali
-                const centering_force = this._computeCenteringForce(fakeNode);  // Forza di centratura verso il centro del disegno
+                const spring_force = this._computeSpringForce(fakeNode);
+                const electro_force = this._computeElectrostaticForce(fakeNode); 
+                const centering_force = this._computeCenteringForce(fakeNode);  
 
-                // Somma di tutte le forze per i nodi fittizi
                 let total_force_x = spring_force.x + electro_force.x + centering_force.x;
                 let total_force_y = spring_force.y + electro_force.y + centering_force.y;
 
-                // Applica le forze ai nodi fittizi
                 fakeNode.x += total_force_x;
                 fakeNode.y += total_force_y;
                 total_force += (Math.abs(total_force_x) + Math.abs(total_force_y));
