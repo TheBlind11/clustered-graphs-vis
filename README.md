@@ -1,33 +1,33 @@
 # clustered-graphs-vis
 
-Si suppone di avere in input un grafo clusterizzato, cioè per il quale esiste una partizione dei nodi in cluster.
+The input is a clustered graph, meaning a graph where nodes are partitioned into clusters.
 
-Questo progetto si propone di sperimentare una strategia per la rappresentazione del grafo clusterizzato tramite un algoritmo force directed consistente nel creare delle catenelle di nodi fittizi che accerchiano i nodi dello stesso cluster. 
+This project aims to represent a clustered graph using a force-directed algorithm. The approach consists of creating chains of fictitious nodes that surround the nodes within each cluster.
 
-Queste catenelle diventano, nel disegno finale, i bordi delle regioni che rappresentano i cluster. 
+These chains form the boundaries of the regions representing each cluster in the final drawing.
 
-I nodi del grafo sono tenuti all'interno delle regioni rappresentanti i loro cluster dalle forze repulsive rispetto ai nodi delle catenelle. 
+The graph nodes are kept within the regions representing their clusters by repulsive forces with respect to the chain nodes.
 
-Lo scopo del progetto è quello di confrontare le varie soluzioni possibili e, potenzialmente, di creare una libreria D3.js per il disegno di grafi clusterizzati.
+The purpose of the project is to compare various solutions and, potentially, to create a D3.js library for drawing clustered graphs.
 
-## Struttura del progetto e funzionamento
+## Project Structure and Functionality
 
-Il progetto è organizzato in questo modo:
+The project is organized as follows:
 
-* Il file `data.json` rappresenta un grafo composto da nodi suddivisi in cluster e connessi tra loro tramite archi.
-* La classe Graph (`graph.js`) contiene tutti i metodi per la gestione del grafo, dall'inizializzazione di nodi ed archi alla gestione delle strutture dati caratteristiche del grafo stesso (nodi "fittizi" compresi).
-* La classe SpringEmbedder (`spring-embedder.js`) gestisce tutta la logica dell'algoritmo SpringEmbedding, in particolare si occupa del calcolo di tutte le forze (elettrostatica, elastica, forza di contenimento e di "centratura" globale) e della visualizzazione del grafo organizzando i nodi in modo che risultino ben distribuiti e facilmente distinguibili, con cluster chiaramente separati. 
-* Il file `utils.js` contiene metodi per calcoli geometrici, come il calcolo del centro di un cluster del grafo o della distanza tra due punti.
-* Il file `main.js` inizializza il grafo ed implementa le funzionalità di zoom e traslazione per permettere all'utente di esplorare il grafo in modo interattivo, migliorando l'usabilità anche per grafi di grandi dimensioni.
+* The `data.json` file represents a graph composed of nodes divided into clusters and connected by edges.
+* The `Graph` class (`graph.js`) contains all methods for managing the graph, from node and edge initialization to handling the data structures characteristic of the graph itself (including "fictitious" nodes).
+* The `SpringEmbedder` class (`spring-embedder.js`) manages the entire SpringEmbedding algorithm logic, specifically calculating all forces (electrostatic, elastic, containment, and global centering force) and visualizing the graph by arranging the nodes to be well distributed and easily distinguishable, with clearly separated clusters.
+* The `utils.js` file contains methods for geometric calculations, such as calculating the center of a graph cluster or the distance between two points.
+* The `main.js` file initializes the graph and implements zoom and translation functionalities, allowing user to explore the graph interactively, enhancing usability even for large graphs.
 
-### Formato dei dati
+### Data Format
 
-Ogni nodo contiene informazioni come:
+Each node contains information such as:
 
-* id: identificatore univoco del nodo.
-* cluster: id del cluster a cui appartiene il nodo.
+* id: unique identifier of the node.
+* cluster: id of the cluster to which the node belongs.
 
-Un esempio di rappresentazione di un nodo è il seguente:
+An example representation of a node is as follows:
 
 ```json
 [
@@ -40,17 +40,17 @@ Un esempio di rappresentazione di un nodo è il seguente:
 
 ## Setup 
 
-- Clonare la repository
+- Clone the repository
 
 ```
 git clone https://github.com/TheBlind11/clustered-graphs-vis
 cd clustered-graphs-vis
 ```
 
-- Avviare il server
+- Start the server
 
 ```
 bash start_server.sh
 ```
 
-- Visitare http://localhost:8888/
+- Visit http://localhost:8888/
