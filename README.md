@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 # clustered-graphs-vis
-=======
-# Algoritmi per la visualizzazione di grafi clusterizzati
 
 Si suppone di avere in input un grafo clusterizzato, cioè per il quale esiste una partizione dei nodi in cluster.
 
@@ -46,8 +43,8 @@ Un esempio di rappresentazione di un nodo è il seguente:
 - Clonare la repository
 
 ```
-git clone https://github.com/allegrastrippoli/infovis.git
-cd infovis
+git clone https://github.com/TheBlind11/clustered-graphs-vis
+cd clustered-graphs-vis
 ```
 
 - Avviare il server
@@ -56,15 +53,4 @@ cd infovis
 bash start_server.sh
 ```
 
-<<<<<<< HEAD
-- Visitare http://localhost:8000/
-
-## Esempio di visualizzazione
-
-![Alt text](layout.png)
-
-
->>>>>>> 702ed60 (feat: visualization improvements)
-=======
-- Visitare http://localhost:8000/
->>>>>>> dc527a2 (feat: README update, fake nodes/links opacity + refactoring)
+- Visitare http://localhost:8888/
