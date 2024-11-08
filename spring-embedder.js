@@ -95,7 +95,7 @@ class SpringEmbedder {
         this._drawingArea.selectAll("path")
             .data(this._graph._getLinks())
             .attr("class", "links")
-            .transition().duration(2500)
+            .transition().duration(1000)
             .attr("d", (link) => {
                 const sourceNode = this._graph._getNodeById(link.source);
                 const targetNode = this._graph._getNodeById(link.target);
@@ -104,7 +104,7 @@ class SpringEmbedder {
 
         this._drawingArea.selectAll("circle")
             .data(this._graph._getNodes())
-            .transition().duration(2500)
+            .transition().duration(1000)
             .attr("cx", node => node.x)
             .attr("cy", node => node.y);
     }
