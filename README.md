@@ -40,7 +40,7 @@ An example representation of a node is as follows:
 
 ## Vis example
 
-![Description of the GIF](assets/vis_example.gif)
+![](assets/vis_example.gif)
 
 ## Setup 
 
